@@ -24,10 +24,7 @@ export default [
 	},
 	{
 		input: {
-			"core/main": fileURLToPath(
-				new URL("core/main.ts"),
-				import.meta.url,
-			),
+			"core/main": fileURLToPath(new URL("core/main.ts", import.meta.url)),
 		},
 		output: {
 			dir: "dist",

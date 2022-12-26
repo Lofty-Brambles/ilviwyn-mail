@@ -10,11 +10,12 @@
     "license": "MIT",
     "contributors": [
         "Lofty Brambles"
-    ],
+    ],    
     "scripts": {
         "preinstall": "npx only-allow pnpm",
         "commit": "cty",
-        "start": "rollup -c -w && node ./scripts/dev.mjs",
+        "start": "node ./dist/core/main.js",
+        "dev": "rollup -c -w",
         "build": "rollup -c"
     },
     "engines": {
