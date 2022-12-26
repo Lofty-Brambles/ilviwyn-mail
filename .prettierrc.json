@@ -3,7 +3,7 @@
     "tabWidth": 4,
     "trailingComma": "all",
     "overrides": [
-        {
+        { 
             "files": ["*.json", "*.md", "*.toml", "*.yml"],
             "options": {
                 "useTabs": false

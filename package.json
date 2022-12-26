@@ -10,7 +10,7 @@
     "license": "MIT",
     "contributors": [
         "Lofty Brambles"
-    ],    
+    ],
     "scripts": {
         "preinstall": "npx only-allow pnpm",
         "commit": "cty",
@@ -55,7 +55,7 @@
             "eslint --fix",
             "prettier -w"
         ],
-        "*.md": [
+        "*.{md,json,toml,yml}": [
             "prettier -w"
         ]
     }
