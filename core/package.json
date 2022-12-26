@@ -1,0 +1,8 @@
+{
+    "name": "@ilviwyn-mail/core",
+    "version": "0.0.0",
+    "description": "The core of the discord bot.",
+    "private": true,
+    "license": "MIT",
+    "scripts": {}
+}

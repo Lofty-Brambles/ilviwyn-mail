@@ -1,0 +1,16 @@
+{
+    "parser": "@typescript-eslint/parser",
+    "extends": ["plugin:@typescript-eslint/recommended", "prettier"],
+    "plugins": ["@typescript-eslint"],
+    "rules": {
+        "@typescript-eslint/consistent-generic-constructors": [
+            "error",
+            "type-annotation"
+        ],
+        "@typescript-eslint/consistent-type-assertions": [
+            "error",
+            { "assertionStyle": "as", "objectLiteralTypeAssertions": "never" }
+        ],
+        "no-console": "off"
+    }
+}

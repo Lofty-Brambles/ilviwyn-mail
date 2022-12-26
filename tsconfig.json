@@ -1,0 +1,26 @@
+{
+    "compilerOptions": {
+        "target": "ESNext",
+        "lib": ["ESNext"],
+        "module": "CommonJS",
+        "moduleResolution": "node",
+
+        "baseUrl": "./",
+        "paths": {
+            "@/*": ["./core/*"],
+            "@plug/*": ["./plugins/*"]
+        },
+
+        "typeRoots": ["./node_modules/@types"],
+        "resolveJsonModule": true,
+        "allowSyntheticDefaultImports": true,
+        "esModuleInterop": true,
+        "forceConsistentCasingInFileNames": true,
+
+        "strict": true /* Enable all strict type-checking options. */,
+        "useUnknownInCatchVariables": true,
+        "skipLibCheck": false
+    },
+    "include": ["**/*.ts", "rollup.config.mjs", "scripts/dev.mjs"],
+    "exclude": ["./node_modules/"]
+}
