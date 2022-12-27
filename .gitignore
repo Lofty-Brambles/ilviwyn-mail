@@ -3,6 +3,7 @@ node_modules/
 *.tsbuildinfo
 *.log
 .pnpm-store
+.eslintcache
 .DS_Store
 .idea
 
