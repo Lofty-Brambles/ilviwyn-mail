@@ -1,0 +1,10 @@
+{
+    "name": "ilviwyn-scripts",
+    "version": "0.0.1",
+    "description": "The scripts to manage the discord bot.",
+    "private": true,
+    "license": "MIT",
+    "type": "module",
+    "main": "./index.js",
+    "bin": "./index.js"
+}

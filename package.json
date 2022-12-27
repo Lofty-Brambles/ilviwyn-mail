@@ -14,9 +14,14 @@
     "scripts": {
         "preinstall": "npx only-allow pnpm",
         "commit": "cty",
-        "start": "node ./dist/core/main.js",
+        "rn": "ilviwyn-scripts",
+        "start": "cross-env DEV=true node ./dist/core/main.js",
         "dev": "rollup -c -w",
-        "build": "rollup -c"
+        "build": "rollup -c",
+        "lint": "prettier -w . --cache",
+        "feat": "changeset",
+        "log": "changeset version && pnpm lint",
+        "release": "pnpm build && changeset publish"
     },
     "engines": {
         "node": ">=18.0.0",
@@ -29,6 +34,11 @@
     ],
     "packageManager": "pnpm@7.12.2+",
     "dependencies": {
+        "@biscuitland/api-types": "^2.2.2",
+        "@biscuitland/cache": "^2.2.2",
+        "@biscuitland/core": "^2.2.2",
+        "@biscuitland/helpers": "^2.2.2",
+        "@biscuitland/rest": "^2.2.2",
         "dotenv": "^16.0.3"
     },
     "devDependencies": {
@@ -38,12 +48,13 @@
         "@types/node": "^18.11.17",
         "@typescript-eslint/eslint-plugin": "^5.47.0",
         "@typescript-eslint/parser": "^5.47.0",
-        "chokidar": "^3.5.3",
+        "cross-env": "^7.0.3",
         "cty": "^1.0.3",
         "eslint": "^8.30.0",
         "eslint-config-prettier": "^8.5.0",
         "fast-glob": "^3.2.12",
         "husky": "^8.0.2",
+        "ilviwyn-scripts": "workspace:*",
         "lint-staged": "^13.1.0",
         "prettier": "^2.8.1",
         "rollup": "^3.8.1",
@@ -52,11 +63,11 @@
     },
     "lint-staged": {
         "*.ts": [
-            "eslint --fix",
-            "prettier -w"
+            "eslint --fix --cache",
+            "prettier -w --cache"
         ],
         "*.{md,json,toml,yml}": [
-            "prettier -w"
+            "prettier -w --cache"
         ]
     }
 }

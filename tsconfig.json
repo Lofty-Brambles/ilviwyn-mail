@@ -8,6 +8,7 @@
         "baseUrl": "./",
         "paths": {
             "@/*": ["./core/*"],
+            "@config": ["./core/config"],
             "@plug/*": ["./plugins/*"]
         },
 
@@ -21,6 +22,6 @@
         "useUnknownInCatchVariables": true,
         "skipLibCheck": false
     },
-    "include": ["**/*.ts", "rollup.config.mjs", "scripts/dev.mjs"],
+    "include": ["**/*.ts"],
     "exclude": ["./node_modules/"]
 }
