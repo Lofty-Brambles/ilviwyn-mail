@@ -4,5 +4,7 @@
     "description": "The core of the discord bot.",
     "private": true,
     "license": "MIT",
-    "scripts": {}
+    "dependencies": {
+        "@ilviwyn-mail/logging": "workspace:*"
+    }
 }
