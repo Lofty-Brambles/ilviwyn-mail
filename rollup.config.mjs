@@ -8,8 +8,8 @@ export default [
 	{
 		input: Object.fromEntries(
 			glob
-				.sync("plugins/**/{index,main}.{js,ts}", {
-					ignore: ["plugins/example"],
+				.sync("modules/**/index.{js,ts}", {
+					ignore: ["modules/example"],
 					deep: 2,
 				})
 				.map((route) => [
@@ -24,7 +24,9 @@ export default [
 	},
 	{
 		input: {
-			"core/main": fileURLToPath(new URL("core/main.ts", import.meta.url)),
+			"core/index": fileURLToPath(
+				new URL("core/index.ts", import.meta.url),
+			),
 		},
 		output: {
 			dir: "dist",

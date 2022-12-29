@@ -2,14 +2,13 @@
     "compilerOptions": {
         "target": "ESNext",
         "lib": ["ESNext"],
-        "module": "CommonJS",
+        "module": "NodeNext",
         "moduleResolution": "node",
 
         "baseUrl": "./",
         "paths": {
             "@/*": ["./core/*"],
-            "@config": ["./core/config"],
-            "@plug/*": ["./plugins/*"]
+            "@plug/*": ["./modules/*"]
         },
 
         "typeRoots": ["./node_modules/@types"],
@@ -17,6 +16,8 @@
         "allowSyntheticDefaultImports": true,
         "esModuleInterop": true,
         "forceConsistentCasingInFileNames": true,
+
+        "experimentalDecorators": true,
 
         "strict": true /* Enable all strict type-checking options. */,
         "useUnknownInCatchVariables": true,
