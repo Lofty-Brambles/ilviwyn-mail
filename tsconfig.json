@@ -18,6 +18,8 @@
         "forceConsistentCasingInFileNames": true,
 
         "experimentalDecorators": true,
+        "noImplicitReturns": true,
+        "importsNotUsedAsValues": "error",
 
         "strict": true /* Enable all strict type-checking options. */,
         "useUnknownInCatchVariables": true,

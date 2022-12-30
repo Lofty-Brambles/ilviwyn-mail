@@ -8,7 +8,7 @@ interface ENVTypes {
 
 class EnvVars {
 	@catches
-	private getVariables(key: string) {
+	private _getVariables(key: string): string {
 		const env = process.env.DEV ? "development" : "production";
 		const gottenKey =
 			env === "development"
@@ -23,7 +23,8 @@ class EnvVars {
 		return gottenKey;
 	}
 
-	public token = this.getVariables("BOT_TOKEN");
+	public token = this._getVariables("BOT_TOKEN");
+	public baseGuildId = this._getVariables("BASE_GUILD_ID");
 
 	public maxRestHitRetries = 5;
 }
