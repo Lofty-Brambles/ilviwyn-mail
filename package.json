@@ -19,8 +19,7 @@
         "deploy": "node ./dist/scripts/deploy.js",
         "dev": "rollup -c -w",
         "build": "rollup -c",
-        "lint": "prettier -w . --cache",
-        "lint-staged": "lint-staged",
+        "lint-staged": "lint-staged --quiet",
         "feat": "changeset",
         "log": "changeset version && pnpm lint",
         "release": "pnpm build && changeset publish"
@@ -63,10 +62,10 @@
     "lint-staged": {
         "*.ts": [
             "eslint --fix --cache",
-            "prettier -w --cache"
+            "prettier -w"
         ],
         "*.{md,json,toml,yml}": [
-            "prettier -w --cache"
+            "prettier -w"
         ]
     }
 }
