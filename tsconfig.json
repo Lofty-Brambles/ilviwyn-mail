@@ -1,14 +1,13 @@
 {
     "compilerOptions": {
-        "target": "ESNext",
-        "lib": ["ESNext"],
+        "target": "ES2022",
+        "lib": ["ES2022"],
         "module": "NodeNext",
-        "moduleResolution": "node",
+        "moduleResolution": "NodeNext",
 
         "baseUrl": "./",
         "paths": {
-            "@/*": ["./core/*"],
-            "@plug/*": ["./modules/*"]
+            "@/*": ["./core/*"]
         },
 
         "typeRoots": ["./node_modules/@types"],
@@ -25,6 +24,6 @@
         "useUnknownInCatchVariables": true,
         "skipLibCheck": false
     },
-    "include": ["**/*.ts"],
+    "include": ["core/**/*.ts"],
     "exclude": ["./node_modules/"]
 }
