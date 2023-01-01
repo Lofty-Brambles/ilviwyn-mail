@@ -3,9 +3,11 @@ import {
 	type DiscordApplicationCommand,
 } from "@biscuitland/api-types";
 import { Session, type UpsertDataApplicationCommands } from "@biscuitland/core";
-import { CONSTANTS } from "@/utilities/env";
 import { DefaultRestAdapter } from "@biscuitland/rest";
-import { catches } from "@/errors";
+import { CONSTANTS } from "@/utilities/env";
+import { logger } from "@/utilities/logger.js";
+
+import { CommandLoader } from "@/services/command-loader.js";
 
 const token = CONSTANTS.token;
 const rest = new DefaultRestAdapter({
@@ -14,11 +16,26 @@ const rest = new DefaultRestAdapter({
 });
 
 export class IlviwynClient extends Session {
+	public isConnected = false;
+	private _commandLoader = new CommandLoader();
+
 	constructor() {
 		super({ token, rest });
 	}
 
-	@catches
+	private async _load(): Promise<void> {
+		this._commandLoader.load(true);
+	}
+
+	override async start(): Promise<void> {
+		if (this.isConnected) return;
+
+		await this._load();
+
+		logger.info("--- Booting up! 🚀 ---");
+		super.start();
+	}
+
 	public upsertApplicationCommandsOnGuild(
 		options: UpsertDataApplicationCommands[],
 	): Promise<DiscordApplicationCommand[]> {

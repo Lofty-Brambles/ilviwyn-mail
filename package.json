@@ -20,6 +20,7 @@
         "dev": "rollup -c -w",
         "build": "rollup -c",
         "lint": "prettier -w . --cache",
+        "lint-staged": "lint-staged",
         "feat": "changeset",
         "log": "changeset version && pnpm lint",
         "release": "pnpm build && changeset publish"

@@ -11,6 +11,7 @@
             "error",
             { "assertionStyle": "as", "objectLiteralTypeAssertions": "never" }
         ],
-        "no-console": "off"
+        "no-console": "off",
+        "prefer-const": ["error", { "destructuring": "all" }]
     }
 }

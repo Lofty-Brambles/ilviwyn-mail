@@ -13,7 +13,9 @@ import type { IlviwynClient } from "@/models/ilviwyn";
 export abstract class Command {
 	public abstract name: string;
 	public abstract description: string;
-	public abstract category: string;
+
+	constructor(public category: string) {}
+
 	public enabled = true;
 	protected dmEnabled = false;
 
