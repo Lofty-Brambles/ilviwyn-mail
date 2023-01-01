@@ -1,2 +1,2 @@
-export * from "./customs/config-error";
+export * from "./customs";
 export * from "./catches";
