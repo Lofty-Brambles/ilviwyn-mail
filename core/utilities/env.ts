@@ -23,10 +23,18 @@ class EnvVars {
 		return gottenKey;
 	}
 
+	private _getOptVariables(key: string): string | undefined {
+		return process.env.key;
+	}
+
 	public token = this._getVariables("BOT_TOKEN");
 	public baseGuildId = this._getVariables("BASE_GUILD_ID");
 
 	public maxRestHitRetries = 5;
+	public applicationCommandRegex =
+		/^[-_\p{L}\p{N}\p{sc=Deva}\p{sc=Thai}]{1,32}$/;
+
+	public commandPath = this._getOptVariables("COMMANDS_DIR") ?? "@/commands";
 }
 
 export const CONSTANTS = new EnvVars();
