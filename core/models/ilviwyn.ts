@@ -1,4 +1,5 @@
 import {
+	GatewayIntents,
 	GUILD_APPLICATION_COMMANDS,
 	type DiscordApplicationCommand,
 } from "@biscuitland/api-types";
@@ -8,6 +9,7 @@ import { CONSTANTS } from "@/utilities/env";
 import { logger } from "@/utilities/logger.js";
 
 import { CommandLoader } from "@/services/command-loader.js";
+import { EventLoader } from "@/services/event-loader.js";
 
 const token = CONSTANTS.token;
 const rest = new DefaultRestAdapter({
@@ -15,16 +17,21 @@ const rest = new DefaultRestAdapter({
 	maxRetryCount: CONSTANTS.maxRestHitRetries,
 });
 
+const intents = GatewayIntents.Guilds | GatewayIntents.GuildBans;
+
 export class IlviwynClient extends Session {
 	public isConnected = false;
 	private _commandLoader = new CommandLoader();
+	private _eventLoader = new EventLoader();
 
 	constructor() {
-		super({ token, rest });
+		super({ token, rest, intents });
 	}
 
 	private async _load(): Promise<void> {
 		this._commandLoader.load(true);
+
+		this._eventLoader.registerEvents(this);
 	}
 
 	override async start(): Promise<void> {

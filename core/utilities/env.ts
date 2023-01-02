@@ -35,6 +35,7 @@ class EnvVars {
 		/^[-_\p{L}\p{N}\p{sc=Deva}\p{sc=Thai}]{1,32}$/;
 
 	public commandPath = this._getOptVariables("COMMANDS_DIR") ?? "@/commands";
+	public eventPath = this._getOptVariables("EVENTS_DIR") ?? "@/events";
 }
 
 export const CONSTANTS = new EnvVars();

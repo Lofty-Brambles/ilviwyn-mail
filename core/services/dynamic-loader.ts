@@ -9,6 +9,7 @@ import { logger } from "@/utilities/logger.js";
 type Newable = abstract new (...args: never[]) => unknown;
 
 type LoadedClass<T extends Newable> = InstanceType<T>;
+type classArray<T extends Newable> = [string, LoadedClass<T>];
 
 type fetchProps = {
 	name: string;
@@ -17,7 +18,7 @@ type fetchProps = {
 
 export class DynamicLoader<T extends Newable> {
 	public dirPath: string;
-	public classCache: LoadedClass<T>[] = [];
+	public classCache: Map<string, LoadedClass<T>> = new Map();
 
 	constructor(aliasedPath: string) {
 		const __dirname = dirname(fileURLToPath(import.meta.url));
@@ -26,7 +27,7 @@ export class DynamicLoader<T extends Newable> {
 	}
 
 	@catches
-	private async _fetcher({ name, dir }: fetchProps): Promise<LoadedClass<T>> {
+	private async _fetcher({ name, dir }: fetchProps): Promise<classArray<T>> {
 		const path = dir
 			? `file://${this.dirPath}/${dir}/${name}`
 			: `file://${this.dirPath}/${name}`;
@@ -37,7 +38,7 @@ export class DynamicLoader<T extends Newable> {
 		) as LoadedClass<T>;
 
 		logger.info(`Handler was loaded successfully from ${path}`);
-		return instance;
+		return [name, instance];
 	}
 
 	@catches
@@ -59,7 +60,7 @@ export class DynamicLoader<T extends Newable> {
 	}
 
 	@catches
-	private async _importClasses(): Promise<LoadedClass<T>[]> {
+	private async _importClasses(): Promise<classArray<T>[]> {
 		if (!existsSync(this.dirPath))
 			throw new LoaderError(
 				"The provided path for loading, does not exist.",
@@ -79,17 +80,20 @@ export class DynamicLoader<T extends Newable> {
 		return Promise.all(classes.map(this._fetcher));
 	}
 
-	public async load(ignoreCache?: boolean): Promise<LoadedClass<T>[]> {
+	public async load(ignoreCache?: boolean): Promise<void> {
 		const skip = ignoreCache ?? false;
 
-		if (skip && this.classCache.length === 0)
-			this.classCache = await this._importClasses();
-		return this.classCache;
+		if (skip && this.classCache.size === 0) {
+			const classes = (await this._importClasses()).filter(
+				([name]) => !name.startsWith("_"),
+			);
+			this.classCache = new Map(classes);
+		}
 	}
 
 	@catches
-	public async get(name: string) {
-		const file = this.classCache.find((n) => n.name === name)?.file;
+	public async get(name: string): Promise<InstanceType<T>> {
+		const file = this.classCache.get(name);
 
 		if (file === undefined)
 			throw new NotFoundError("The provided class does not exist!");
