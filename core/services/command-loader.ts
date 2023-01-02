@@ -10,23 +10,25 @@ export class CommandLoader extends DynamicLoader<typeof Command> {
 		super(CONSTANTS.commandPath);
 	}
 
-	private _postLoadHook(commands: Command[]): void {
-		commands.forEach((command) => {
-			if (CONSTANTS.applicationCommandRegex.test(command.name)) return;
+	private _postLoadHook(): void {
+		const classArray = Array.from(this.classCache.entries());
+		classArray.forEach(([name, command]) => {
+			if (CONSTANTS.applicationCommandRegex.test(name)) return;
 
 			command.name = command.name.toLowerCase();
+			name = name.toLowerCase();
 
 			logger.warn(
 				{ at: join(this.dirPath, command.category, command.name) },
 				`The command has a name with a capital letter! It will be renames as ${command.name}.`,
 			);
 		});
+		this.classCache = new Map(classArray);
 	}
 
-	public override load(ignoreCache?: boolean): Promise<Command[]> {
-		const loaded = super.load(ignoreCache);
+	public override async load(ignoreCache?: boolean): Promise<void> {
+		await super.load(ignoreCache);
 		logger.info("All the commands were successfully loaded!");
-		this._postLoadHook(this.classCache);
-		return loaded;
+		this._postLoadHook();
 	}
 }

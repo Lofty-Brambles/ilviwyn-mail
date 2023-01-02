@@ -1,12 +1,11 @@
 import type {
-	BitwisePermissionFlags,
 	DiscordApplicationCommandOption,
-	GatewayIntents,
 	Localization,
 } from "@biscuitland/api-types";
 import type {
 	CommandInteraction,
 	CreateApplicationCommand,
+	PermissionResolvable,
 } from "@biscuitland/core";
 import type { IlviwynClient } from "@/models/ilviwyn";
 
@@ -19,21 +18,20 @@ export abstract class Command {
 	public enabled = true;
 	protected dmEnabled = false;
 
-	public abstract nameLocalizations?: Localization;
-	public abstract descriptionLocalizations?: Localization;
-	public abstract usage?: string;
-	public abstract cooldown?: number;
+	public nameLocalizations?: Localization;
+	public descriptionLocalizations?: Localization;
+	public usage?: string;
+	public cooldown?: number;
 
 	protected ownerOnly = false;
 	protected managerOnly = false;
-	public abstract UserPermissions: (keyof typeof BitwisePermissionFlags)[];
-	public abstract BotIntents: (keyof typeof GatewayIntents)[];
+	public abstract UserPermissions: PermissionResolvable;
 
-	public abstract options?: DiscordApplicationCommandOption[];
-	public abstract interaction: (
-		int: CommandInteraction,
+	public options?: DiscordApplicationCommandOption[];
+	public abstract interaction(
 		bot: IlviwynClient,
-	) => void | Promise<void>;
+		int: CommandInteraction,
+	): void | Promise<void>;
 
 	public getSlashRegistryOptions(): CreateApplicationCommand {
 		return {
@@ -46,6 +44,9 @@ export abstract class Command {
 			}),
 			...(this.descriptionLocalizations && {
 				description_localizations: this.descriptionLocalizations,
+			}),
+			...(this.UserPermissions && {
+				default_member_permissions: this.UserPermissions,
 			}),
 		};
 	}
