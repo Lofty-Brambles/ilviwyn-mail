@@ -1,4 +1,4 @@
-import { TypedError } from "./typed-error.js";
+import { TypedError } from "./typed-error";
 
 export class ConfigError extends TypedError {
 	public type = "ConfigError";

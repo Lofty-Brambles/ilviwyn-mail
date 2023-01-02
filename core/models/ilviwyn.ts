@@ -6,10 +6,10 @@ import {
 import { Session, type UpsertDataApplicationCommands } from "@biscuitland/core";
 import { DefaultRestAdapter } from "@biscuitland/rest";
 import { CONSTANTS } from "@/utilities/env";
-import { logger } from "@/utilities/logger.js";
+import { logger } from "@/utilities/logger";
 
-import { CommandLoader } from "@/services/command-loader.js";
-import { EventLoader } from "@/services/event-loader.js";
+import { CommandLoader } from "@/services/command-loader";
+import { EventLoader } from "@/services/event-loader";
 
 const token = CONSTANTS.token;
 const rest = new DefaultRestAdapter({

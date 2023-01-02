@@ -9,23 +9,48 @@ import type {
 } from "@biscuitland/core";
 import type { IlviwynClient } from "@/models/ilviwyn";
 
-export abstract class Command {
+interface CommandType {
+	name: string;
+	description: string;
+	category: string;
+
+	enabled: boolean;
+	dmEnabled: boolean;
+
+	nameLocalizations?: Localization;
+	descriptionLocalizations?: Localization;
+	usage?: string;
+	cooldown?: number;
+
+	ownerOnly: boolean;
+	managerOnly: boolean;
+	userPermissions: PermissionResolvable;
+	options?: DiscordApplicationCommandOption[];
+
+	interaction(
+		bot: IlviwynClient,
+		int: CommandInteraction,
+	): void | Promise<void>;
+	getSlashRegistryOptions(): CreateApplicationCommand;
+}
+
+export abstract class Command implements CommandType {
 	public abstract name: string;
 	public abstract description: string;
 
 	constructor(public category: string) {}
 
 	public enabled = true;
-	protected dmEnabled = false;
+	public dmEnabled = false;
 
 	public nameLocalizations?: Localization;
 	public descriptionLocalizations?: Localization;
 	public usage?: string;
 	public cooldown?: number;
 
-	protected ownerOnly = false;
-	protected managerOnly = false;
-	public abstract UserPermissions: PermissionResolvable;
+	public ownerOnly = false;
+	public managerOnly = false;
+	public abstract userPermissions: PermissionResolvable;
 
 	public options?: DiscordApplicationCommandOption[];
 	public abstract interaction(
@@ -45,8 +70,8 @@ export abstract class Command {
 			...(this.descriptionLocalizations && {
 				description_localizations: this.descriptionLocalizations,
 			}),
-			...(this.UserPermissions && {
-				default_member_permissions: this.UserPermissions,
+			...(this.userPermissions && {
+				default_member_permissions: this.userPermissions,
 			}),
 		};
 	}

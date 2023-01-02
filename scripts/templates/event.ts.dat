@@ -1,0 +1,10 @@
+import type { Events } from "@biscuitland/core";
+import { Event, ListenRunType } from "@/models/events.js";
+
+export default class #{EVENT} extends Event {
+	public name: keyof Events = "#{EVENT}";
+	public description: string = "";
+	public type: ListenRunType = "";
+
+	public handle: Events[keyof Events];
+}

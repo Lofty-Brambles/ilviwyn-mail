@@ -1,0 +1,22 @@
+import {
+	BitwisePermissionFlags,
+	DiscordApplicationCommandOption,
+} from "@biscuitland/api-types";
+import type { CommandInteraction } from "@biscuitland/core";
+import type { IlviwynClient } from "@/models/ilviwyn";
+import { Command } from "@/models/commands";
+
+export default class #{COMMAND} extends Command {
+	public name: string = "#{COMMAND}";
+	public description: string = "";
+
+	public userPermissions = BitwisePermissionFlags.USE_APPLICATION_COMMANDS;
+
+	public options?: DiscordApplicationCommandOption[];
+
+	/*eslint no-unused-vars: */
+	public interaction(
+		bot: IlviwynClient,
+		int: CommandInteraction,
+	): void | Promise<void> {}
+}

@@ -4,14 +4,14 @@ import {
 	DiscordApplicationCommandOption,
 } from "@biscuitland/api-types";
 import type { CommandInteraction } from "@biscuitland/core";
-import type { IlviwynClient } from "@/models/ilviwyn.js";
-import { Command } from "@/models/commands.js";
+import type { IlviwynClient } from "@/models/ilviwyn";
+import { Command } from "@/models/commands";
 
 export default class mod extends Command {
 	public name = "mod";
 	public description = "Opens up a moderation panel for someone";
 
-	public UserPermissions = BitwisePermissionFlags.MODERATE_MEMBERS;
+	public userPermissions = BitwisePermissionFlags.MODERATE_MEMBERS;
 
 	public options: DiscordApplicationCommandOption[] = [
 		{
@@ -29,9 +29,10 @@ export default class mod extends Command {
 	];
 
 	public interaction(
+		// eslint-disable-next-line @typescript-eslint/no-unused-vars
 		bot: IlviwynClient,
+		// eslint-disable-next-line @typescript-eslint/no-unused-vars
 		int: CommandInteraction,
-	): void | Promise<void> {
-		console.log(bot, int); // test
-	}
+		// eslint-disable-next-line @typescript-eslint/no-empty-function
+	): void | Promise<void> {}
 }

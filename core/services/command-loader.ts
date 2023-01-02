@@ -1,8 +1,8 @@
-import type { Command } from "@/models/commands.js";
-import { DynamicLoader } from "./dynamic-loader.js";
-import { CONSTANTS } from "@/utilities/env.js";
+import type { Command } from "@/models/commands";
+import { DynamicLoader } from "./dynamic-loader";
+import { CONSTANTS } from "@/utilities/env";
 
-import { logger } from "@/utilities/logger.js";
+import { logger } from "@/utilities/logger";
 import { join } from "path";
 
 export class CommandLoader extends DynamicLoader<typeof Command> {
