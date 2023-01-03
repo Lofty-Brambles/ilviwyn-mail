@@ -15,9 +15,9 @@
     "scripts": {
         "preinstall": "npx only-allow pnpm",
         "commit": "cty",
-        "start": "cross-env DEV=true node ./dist/core/index.js",
-        "deploy": "node ./dist/scripts/deploy.js",
-        "initCmd": "node ./scripts/generate.mjs",
+        "start": "cross-env DEV=true node ./dist/index.js",
+        "deploy": "node ./dist/deploy.js",
+        "generate": "node ./scripts/generate.mjs",
         "dev": "rollup -c -w",
         "build": "rollup -c",
         "lint-staged": "lint-staged --quiet",

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { logger } from "@/utilities/logger";
 
 import { TypedError } from "./customs/typed-error";

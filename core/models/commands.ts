@@ -8,6 +8,7 @@ import type {
 	PermissionResolvable,
 } from "@biscuitland/core";
 import type { IlviwynClient } from "@/models/ilviwyn";
+import { catches } from "@/errors/catches";
 
 interface CommandType {
 	name: string;
@@ -31,7 +32,7 @@ interface CommandType {
 		bot: IlviwynClient,
 		int: CommandInteraction,
 	): void | Promise<void>;
-	getSlashRegistryOptions(): CreateApplicationCommand;
+	getSlashOptions(): CreateApplicationCommand;
 }
 
 export abstract class Command implements CommandType {
@@ -58,7 +59,8 @@ export abstract class Command implements CommandType {
 		int: CommandInteraction,
 	): void | Promise<void>;
 
-	public getSlashRegistryOptions(): CreateApplicationCommand {
+	@catches
+	public getSlashOptions(): CreateApplicationCommand {
 		return {
 			name: this.name,
 			description: this.description,

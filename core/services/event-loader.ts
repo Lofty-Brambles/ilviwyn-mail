@@ -16,9 +16,9 @@ export class EventLoader extends DynamicLoader<typeof Event> {
 
 		for (const event of this.classCache.values()) {
 			if (ListenRunType.once === event.type)
-				bot.events.once(event.name, event.handle);
+				bot.events.once(event.name, event.handle(bot));
 			else if (ListenRunType.multiple === event.type)
-				bot.events.on(event.name, event.handle);
+				bot.events.on(event.name, event.handle(bot));
 		}
 	}
 }

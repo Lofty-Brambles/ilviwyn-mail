@@ -1,8 +1,8 @@
 import glob from "fast-glob";
-import { extname as ext, relative, resolve } from "path";
+import { extname as ext, relative } from "path";
 import { fileURLToPath } from "url";
 
-import { swc } from "rollup-plugin-swc3";
+import { swc, defineRollupSwcOption } from "rollup-plugin-swc3";
 import { nodeResolve } from "@rollup/plugin-node-resolve";
 
 export default {
@@ -21,5 +21,13 @@ export default {
 	=-=-=-= Ilviwyn-mail: Yet another modmail =-=-=-=
 */`,
 	},
-	plugins: [nodeResolve(), swc({ minify: true })],
+	plugins: [
+		nodeResolve(),
+		swc(
+			defineRollupSwcOption({
+				minify: true,
+				module: { type: "es6", strictMode: true },
+			}),
+		),
+	],
 };

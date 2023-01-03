@@ -21,17 +21,28 @@ const intents = GatewayIntents.Guilds | GatewayIntents.GuildBans;
 
 export class IlviwynClient extends Session {
 	public isConnected = false;
-	private _commandLoader = new CommandLoader();
-	private _eventLoader = new EventLoader();
+
+	// CACHE - has cache
+	public commandLoader = new CommandLoader();
+	public eventLoader = new EventLoader();
 
 	constructor() {
 		super({ token, rest, intents });
 	}
 
 	private async _load(): Promise<void> {
-		this._commandLoader.load(true);
+		this.commandLoader.load(true);
 
-		this._eventLoader.registerEvents(this);
+		this.eventLoader.registerEvents(this);
+	}
+
+	public async basicStart(): Promise<void> {
+		if (this.isConnected) return;
+
+		await this._load();
+
+		logger.info("--- Booting up! 🚀 ---");
+		super.start();
 	}
 
 	override async start(): Promise<void> {

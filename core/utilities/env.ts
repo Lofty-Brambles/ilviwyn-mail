@@ -1,11 +1,6 @@
 import { catches, ConfigError } from "@/errors";
 import "dotenv/config";
 
-interface ENVTypes {
-	dev: string;
-	prod: string;
-}
-
 class EnvVars {
 	@catches
 	private _getVariables(key: string): string {
@@ -24,7 +19,7 @@ class EnvVars {
 	}
 
 	private _getOptVariables(key: string): string | undefined {
-		return process.env.key;
+		return process.env[key];
 	}
 
 	public token = this._getVariables("BOT_TOKEN");

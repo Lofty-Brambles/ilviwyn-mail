@@ -3,9 +3,13 @@ import {
 	BitwisePermissionFlags,
 	DiscordApplicationCommandOption,
 } from "@biscuitland/api-types";
-import type { CommandInteraction } from "@biscuitland/core";
-import type { IlviwynClient } from "@/models/ilviwyn";
+import type {
+	CommandInteraction,
+	InteractionApplicationCommandCallbackData as ReturnData,
+} from "@biscuitland/core";
+import type { IlviwynClient as Client } from "@/models/ilviwyn";
 import { Command } from "@/models/commands";
+import { catches } from "@/errors/catches";
 
 export default class mod extends Command {
 	public name = "mod";
@@ -28,11 +32,22 @@ export default class mod extends Command {
 		},
 	];
 
-	public interaction(
-		// eslint-disable-next-line @typescript-eslint/no-unused-vars
-		bot: IlviwynClient,
-		// eslint-disable-next-line @typescript-eslint/no-unused-vars
+	@catches
+	// eslint-disable-next-line @typescript-eslint/no-unused-vars
+	private _response(bot: Client, int: CommandInteraction): ReturnData {
+		return {
+			embeds: [
+				{
+					title: "Moderation Menu",
+				},
+			],
+		};
+	}
+
+	public async interaction(
+		bot: Client,
 		int: CommandInteraction,
-		// eslint-disable-next-line @typescript-eslint/no-empty-function
-	): void | Promise<void> {}
+	): Promise<void> {
+		int.respondWith(this._response(bot, int));
+	}
 }

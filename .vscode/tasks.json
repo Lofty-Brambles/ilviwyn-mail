@@ -7,14 +7,35 @@
             "script": "start",
             "presentation": {
                 "reveal": "always",
-                "focus": true,
+                "focus": false,
                 "panel": "dedicated"
             },
             "problemMatcher": [],
-            "group": {
-                "kind": "build",
-                "isDefault": true
+            "group": "build"
+        },
+        {
+            "label": "deploy",
+            "type": "npm",
+            "script": "deploy",
+            "presentation": {
+                "reveal": "always",
+                "focus": false,
+                "panel": "new"
             },
+            "problemMatcher": [],
+            "group": "build"
+        },
+        {
+            "label": "compile",
+            "type": "npm",
+            "script": "dev",
+            "presentation": {
+                "reveal": "never",
+                "focus": false,
+                "panel": "shared"
+            },
+            "problemMatcher": [],
+            "group": "build"
         }
     ]
 }
