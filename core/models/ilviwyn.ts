@@ -5,17 +5,14 @@ import {
 } from "@biscuitland/api-types";
 import { Session, type UpsertDataApplicationCommands } from "@biscuitland/core";
 import { DefaultRestAdapter } from "@biscuitland/rest";
-import { CONSTANTS } from "@/utilities/env";
-import { logger } from "@/utilities/logger";
+import { CONSTANTS } from "@/utilities/env.js";
+import { logger } from "@/utilities/logger.js";
 
-import { CommandLoader } from "@/services/command-loader";
-import { EventLoader } from "@/services/event-loader";
+import { CommandLoader } from "@/services/command-loader.js";
+import { EventLoader } from "@/services/event-loader.js";
 
 const token = CONSTANTS.token;
-const rest = new DefaultRestAdapter({
-	token,
-	maxRetryCount: CONSTANTS.maxRestHitRetries,
-});
+const rest = new DefaultRestAdapter({ token });
 
 const intents = GatewayIntents.Guilds | GatewayIntents.GuildBans;
 

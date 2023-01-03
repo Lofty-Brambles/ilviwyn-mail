@@ -3,8 +3,9 @@ import type {
 	Events,
 	Interaction,
 } from "@biscuitland/core";
-import { Event, ListenRunType } from "@/models/events";
-import type { IlviwynClient } from "@/models/ilviwyn";
+import { Event, ListenRunType } from "@/models/events.js";
+import type { IlviwynClient } from "@/models/ilviwyn.js";
+import { catches } from "@/errors/index.js";
 
 export default class interactionCreate extends Event {
 	public name: keyof Events = "interactionCreate";
@@ -19,9 +20,10 @@ export default class interactionCreate extends Event {
 		await cmd.interaction(bot, int);
 	}
 
-	public handle = (bot: IlviwynClient): Events[keyof Events] => {
+	@catches
+	public handle(bot: IlviwynClient): Events[keyof Events] {
 		return async (int: Interaction) => {
 			if (int.isCommand()) await this._cmd(bot, int);
 		};
-	};
+	}
 }

@@ -7,8 +7,8 @@ import type {
 	CreateApplicationCommand,
 	PermissionResolvable,
 } from "@biscuitland/core";
-import type { IlviwynClient } from "@/models/ilviwyn";
-import { catches } from "@/errors/catches";
+import type { IlviwynClient } from "@/models/ilviwyn.js";
+import { catches } from "@/errors/index.js";
 
 interface CommandType {
 	name: string;

@@ -1,4 +1,4 @@
-import { catches, ConfigError } from "@/errors";
+import { catches, ConfigError } from "@/errors/index.js";
 import "dotenv/config";
 
 class EnvVars {

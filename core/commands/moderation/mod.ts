@@ -7,9 +7,9 @@ import type {
 	CommandInteraction,
 	InteractionApplicationCommandCallbackData as ReturnData,
 } from "@biscuitland/core";
-import type { IlviwynClient as Client } from "@/models/ilviwyn";
-import { Command } from "@/models/commands";
-import { catches } from "@/errors/catches";
+import type { IlviwynClient as Client } from "@/models/ilviwyn.js";
+import { Command } from "@/models/commands.js";
+import { catches } from "@/errors/index.js";
 
 export default class mod extends Command {
 	public name = "mod";
@@ -32,7 +32,6 @@ export default class mod extends Command {
 		},
 	];
 
-	@catches
 	// eslint-disable-next-line @typescript-eslint/no-unused-vars
 	private _response(bot: Client, int: CommandInteraction): ReturnData {
 		return {
@@ -44,6 +43,7 @@ export default class mod extends Command {
 		};
 	}
 
+	@catches
 	public async interaction(
 		bot: Client,
 		int: CommandInteraction,

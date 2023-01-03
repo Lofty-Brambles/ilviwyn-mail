@@ -1,12 +1,14 @@
 import type { Events } from "@biscuitland/core";
-import { Event, ListenRunType } from "@/models/events";
-import type { IlviwynClient } from "@/models/ilviwyn";
+import { Event, ListenRunType } from "@/models/events.js";
+import type { IlviwynClient } from "@/models/ilviwyn.js";
+import { catches } from "@/errors/index.js";
 
 export default class #{EVENT} extends Event {
 	public name: keyof Events = "#{EVENT}";
 	public description = "";
 	public type: ListenRunType = ListenRunType;
 
+	@catches
 	public handle = (bot: IlviwynClient): Events[keyof Events] => {
 		return;
 	};

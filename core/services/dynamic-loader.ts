@@ -3,8 +3,8 @@ import { lstat, readdir } from "fs/promises";
 
 import { dirname, join } from "path";
 import { fileURLToPath } from "url";
-import { catches, LoaderError, NotFoundError } from "@/errors";
-import { logger } from "@/utilities/logger";
+import { catches, LoaderError, NotFoundError } from "@/errors/index.js";
+import { logger } from "@/utilities/logger.js";
 
 type Newable = abstract new (...args: never[]) => unknown;
 

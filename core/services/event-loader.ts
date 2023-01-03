@@ -1,9 +1,9 @@
-import { Event, ListenRunType } from "@/models/events";
-import { DynamicLoader } from "./dynamic-loader";
-import { CONSTANTS } from "@/utilities/env";
+import { Event, ListenRunType } from "@/models/events.js";
+import { DynamicLoader } from "@/services/dynamic-loader.js";
+import { CONSTANTS } from "@/utilities/env.js";
 
-import type { IlviwynClient } from "@/models/ilviwyn";
-import { catches } from "@/errors/catches";
+import type { IlviwynClient } from "@/models/ilviwyn.js";
+import { catches } from "@/errors/index.js";
 
 export class EventLoader extends DynamicLoader<typeof Event> {
 	constructor() {

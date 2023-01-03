@@ -1,5 +1,5 @@
 import type { Events } from "@biscuitland/core";
-import type { IlviwynClient } from "./ilviwyn";
+import type { IlviwynClient } from "@/models/ilviwyn.js";
 
 export enum ListenRunType {
 	once = "once",
@@ -13,7 +13,7 @@ interface EventType {
 	description: string;
 	type: ListenRunType;
 
-	handle: (bot: IlviwynClient) => Handlers;
+	handle(bot: IlviwynClient): Handlers;
 }
 
 export abstract class Event implements EventType {
@@ -21,5 +21,5 @@ export abstract class Event implements EventType {
 	public abstract description: string;
 	public abstract type: ListenRunType;
 
-	public abstract handle: (bot: IlviwynClient) => Handlers;
+	public abstract handle(bot: IlviwynClient): Handlers;
 }

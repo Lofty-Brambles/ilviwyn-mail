@@ -1,2 +1,2 @@
-export * from "./customs";
-export * from "./catches";
+export * from "@/errors/customs/index.js";
+export * from "@/errors/catches.js";

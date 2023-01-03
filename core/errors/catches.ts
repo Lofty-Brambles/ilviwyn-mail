@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { logger } from "@/utilities/logger";
+import { logger } from "@/utilities/logger.js";
 
-import { TypedError } from "./customs/typed-error";
+import { TypedError } from "@/errors/customs/typed-error.js";
 
 export const catches = (target: any, _: string, desc: any): void => {
 	const method = desc.value;
